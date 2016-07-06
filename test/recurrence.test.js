@@ -28,7 +28,7 @@ describe('Recurrence', () => {
 
   })
 
-  describe('next', () => {
+  xdescribe('next', () => {
 
     it('daily', () => {
       let r = new Recurrence({

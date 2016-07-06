@@ -13,4 +13,8 @@ export default class{
     return this.startDate <= date && ( diffInDay % this.interval ) === 0
   }
 
+  next(date){
+    
+  }
+
 }

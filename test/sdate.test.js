@@ -10,4 +10,9 @@ describe('Sdate', () => {
     assert.equal(Sdate.diffInDay('2016/06/21', '2016/06/22'), 1)
   })
 
+  it('dateToString', () => {
+    assert.equal(Sdate.dateToString(new Date('2016/01/01')), '2016/01/01')
+    assert.equal(Sdate.dateToString(new Date('2016/12/10')), '2016/12/10')
+  })
+
 })
