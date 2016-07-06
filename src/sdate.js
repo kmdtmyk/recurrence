@@ -7,16 +7,16 @@ const DAY = HOUR * 24
 
 export default class{
 
-  static addDays(date, days){
-    let d = new Date(date)
-    d = new Date(d.valueOf() + DAY * days)
-    return this.dateToString(d)
+  static addDays(str, days){
+    let date = new Date(str)
+    let newDate = new Date(date.valueOf() + DAY * days)
+    return this.dateToString(newDate)
   }
 
-  static diffInDay(date1, date2){
-    let d1 = new Date(date1)
-    let d2 = new Date(date2)
-    return (d2 - d1) / DAY
+  static diffInDay(str1, str2){
+    let date1 = new Date(str1)
+    let date2 = new Date(str2)
+    return (date2 - date1) / DAY
   }
 
   static dateToString(date){
