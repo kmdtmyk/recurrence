@@ -64,4 +64,13 @@ export default class{
     return `${year}/${month}/01`
   }
 
+  static toObject(str){
+    let date = new Date(str)
+
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    return {year, month, day}
+  }
+
 }

@@ -38,4 +38,8 @@ describe('Sdate', () => {
     assert.equal(Sdate.startOfMonth('2016/08/31'), '2016/08/01')
   })
 
+  it('toObject', () => {
+    assert.deepEqual(Sdate.toObject('2016/08/18'), {year: 2016, month: 8, day: 18})
+  })
+
 })
