@@ -54,13 +54,7 @@ export default class{
     }else{
       strs = args
     }
-    let result = strs[0]
-    strs.forEach(str => {
-      if(str < result){
-        result = str
-      }
-    })
-    return result
+    return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
   }
 
   static lessThan(str1, str2){
