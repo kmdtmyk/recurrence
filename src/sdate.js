@@ -7,7 +7,7 @@ const DAY = HOUR * 24
 
 export default class{
 
-  static addDays(str, days){
+  static addDay(str, days){
     let o = this.toObject(str)
     return this.create(o.year, o.month, o.day + days)
   }
