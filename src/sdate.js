@@ -36,4 +36,14 @@ export default class{
 
   }
 
+  static startOfMonth(str){
+    let date = new Date(str)
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    if(month < 10){
+      month = '0' + month
+    }
+    return `${year}/${month}/01`
+  }
+
 }
