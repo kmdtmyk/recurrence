@@ -63,6 +63,12 @@ export default class{
     return result
   }
 
+  static lessThan(str1, str2){
+    let date1 = new Date(str1)
+    let date2 = new Date(str2)
+    return date1.valueOf() < date2.valueOf()
+  }
+
   static startOfMonth(str){
     let o = this.toObject(str)
     return this.create(o.year, o.month, 1)
