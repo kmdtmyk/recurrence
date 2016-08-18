@@ -13,6 +13,19 @@ describe('Sdate', () => {
     assert.equal(Sdate.addDay('2016/06/30', 1), '2016/07/01')
   })
 
+  xit('addMonth', () => {
+    assert.equal(Sdate.addMonth('2016/08/01', 1), '2016/09/01')
+    assert.equal(Sdate.addMonth('2016/08/01', 4), '2016/12/01')
+    assert.equal(Sdate.addMonth('2016/08/01', 5), '2017/01/01')
+
+    assert.equal(Sdate.addMonth('2016/08/15', -1), '2016/07/15')
+    assert.equal(Sdate.addMonth('2016/08/15', 0), '2016/08/15')
+    assert.equal(Sdate.addMonth('2016/08/15', 1), '2016/09/15')
+
+    assert.equal(Sdate.addMonth('2016/08/31', 1), '2016/09/30')
+    assert.equal(Sdate.addMonth('2016/08/31', 6), '2017/02/28')
+  })
+
   it('create', () => {
     assert.equal(Sdate.create(2016, 8, 18), '2016/08/18')
     assert.equal(Sdate.create(2016, 8, 0), '2016/07/31')
