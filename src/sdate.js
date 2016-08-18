@@ -45,6 +45,22 @@ export default class{
 
   }
 
+  static min(...args){
+    let strs = args
+    if(Array.isArray(arguments[0])){
+      strs = arguments[0]
+    }else{
+      strs = args
+    }
+    let result = strs[0]
+    strs.forEach(str => {
+      if(str < result){
+        result = str
+      }
+    })
+    return result
+  }
+
   static startOfMonth(str){
     let o = this.toObject(str)
     return this.create(o.year, o.month, 1)

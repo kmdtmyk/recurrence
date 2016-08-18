@@ -53,6 +53,14 @@ describe('Sdate', () => {
     assert.equal(Sdate.endOfMonth('2017/02/15'), '2017/02/28')
   })
 
+  it('min', () => {
+    assert.equal(Sdate.min('2016/08/10', '2016/08/15'), '2016/08/10')
+    assert.equal(Sdate.min('2016/08/10', '2016/08/15', '2016/08/05'), '2016/08/05')
+
+    assert.equal(Sdate.min(['2016/08/10', '2016/08/15']), '2016/08/10')
+    assert.equal(Sdate.min(['2016/08/10', '2016/08/15', '2016/08/05']), '2016/08/05')
+  })
+
   it('startOfMonth', () => {
     assert.equal(Sdate.startOfMonth('2016/08/01'), '2016/08/01')
     assert.equal(Sdate.startOfMonth('2016/08/18'), '2016/08/01')
