@@ -8,24 +8,13 @@ const DAY = HOUR * 24
 export default class{
 
   static addDays(str, days){
-    let date = new Date(str)
-    let newDate = new Date(date.valueOf() + DAY * days)
-    return this.dateToString(newDate)
+    let o = this.toObject(str)
+    return this.create(o.year, o.month, o.day + days)
   }
 
   static create(year, month, day){
     let date = new Date(year, month - 1, day)
-
-    year = date.getFullYear()
-    month = date.getMonth() + 1
-    day = date.getDate()
-    if(month < 10){
-      month = '0' + month
-    }
-    if(day < 10){
-      day = '0' + day
-    }
-    return `${year}/${month}/${day}`
+    return this.dateToString(date)
   }
 
   static diffInDay(str1, str2){
@@ -48,21 +37,8 @@ export default class{
   }
 
   static endOfMonth(str){
-    let date = new Date(str)
-    date.setDate(1)
-    date.setMonth(date.getMonth() + 1)
-    date.setDate(0)
-
-    let year = date.getFullYear()
-    let month = date.getMonth() + 1
-    if(month < 10){
-      month = '0' + month
-    }
-    let day = date.getDate()
-    if(day < 10){
-      day = '0' + day
-    }
-    return `${year}/${month}/${day}`
+    let o = this.toObject(str)
+    return this.create(o.year, o.month + 1, 0)
   }
 
   static equal(){
@@ -70,18 +46,12 @@ export default class{
   }
 
   static startOfMonth(str){
-    let date = new Date(str)
-    let year = date.getFullYear()
-    let month = date.getMonth() + 1
-    if(month < 10){
-      month = '0' + month
-    }
-    return `${year}/${month}/01`
+    let o = this.toObject(str)
+    return this.create(o.year, o.month, 1)
   }
 
   static toObject(str){
     let date = new Date(str)
-
     let year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate()
