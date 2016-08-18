@@ -32,6 +32,24 @@ export default class{
     return `${year}/${month}/${day}`
   }
 
+  static endOfMonth(str){
+    let date = new Date(str)
+    date.setDate(1)
+    date.setMonth(date.getMonth() + 1)
+    date.setDate(0)
+
+    let year = date.getFullYear()
+    let month = date.getMonth() + 1
+    if(month < 10){
+      month = '0' + month
+    }
+    let day = date.getDate()
+    if(day < 10){
+      day = '0' + day
+    }
+    return `${year}/${month}/${day}`
+  }
+
   static equal(){
 
   }

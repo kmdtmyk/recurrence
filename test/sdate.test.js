@@ -24,10 +24,18 @@ describe('Sdate', () => {
     assert.equal(Sdate.dateToString(new Date('2016/12/10')), '2016/12/10')
   })
 
+  it('endOfMonth', () => {
+    assert.equal(Sdate.endOfMonth('2016/08/01'), '2016/08/31')
+    assert.equal(Sdate.endOfMonth('2016/08/18'), '2016/08/31')
+    assert.equal(Sdate.endOfMonth('2016/08/31'), '2016/08/31')
+    assert.equal(Sdate.endOfMonth('2016/02/15'), '2016/02/29')
+    assert.equal(Sdate.endOfMonth('2017/02/15'), '2017/02/28')
+  })
+
   it('startOfMonth', () => {
-      assert.equal(Sdate.startOfMonth('2016/08/01'), '2016/08/01')
-      assert.equal(Sdate.startOfMonth('2016/08/18'), '2016/08/01')
-      assert.equal(Sdate.startOfMonth('2016/08/31'), '2016/08/01')
+    assert.equal(Sdate.startOfMonth('2016/08/01'), '2016/08/01')
+    assert.equal(Sdate.startOfMonth('2016/08/18'), '2016/08/01')
+    assert.equal(Sdate.startOfMonth('2016/08/31'), '2016/08/01')
   })
 
 })
