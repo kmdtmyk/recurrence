@@ -13,6 +13,14 @@ describe('Sdate', () => {
     assert.equal(Sdate.addDays('2016/06/30', 1), '2016/07/01')
   })
 
+  it('create', () => {
+    assert.equal(Sdate.create(2016, 8, 18), '2016/08/18')
+    assert.equal(Sdate.create(2016, 8, 0), '2016/07/31')
+    assert.equal(Sdate.create(2016, 8, 32), '2016/09/01')
+    assert.equal(Sdate.create(2016, 13, 1), '2017/01/01')
+    assert.equal(Sdate.create(2016, 0, 1), '2015/12/01')
+  })
+
   it('diffInDay', () => {
     assert.equal(Sdate.diffInDay('2016/06/21', '2016/06/20'), -1)
     assert.equal(Sdate.diffInDay('2016/06/21', '2016/06/21'), 0)

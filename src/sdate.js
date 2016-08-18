@@ -13,6 +13,21 @@ export default class{
     return this.dateToString(newDate)
   }
 
+  static create(year, month, day){
+    let date = new Date(year, month - 1, day)
+
+    year = date.getFullYear()
+    month = date.getMonth() + 1
+    day = date.getDate()
+    if(month < 10){
+      month = '0' + month
+    }
+    if(day < 10){
+      day = '0' + day
+    }
+    return `${year}/${month}/${day}`
+  }
+
   static diffInDay(str1, str2){
     let date1 = new Date(str1)
     let date2 = new Date(str2)
