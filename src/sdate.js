@@ -1,3 +1,4 @@
+import flattenDeep from 'lodash.flattendeep'
 
 const SECOND = 1000
 const MINUTE = SECOND * 60
@@ -64,12 +65,7 @@ export default class{
   }
 
   static min(...args){
-    let strs = args
-    if(Array.isArray(arguments[0])){
-      strs = arguments[0]
-    }else{
-      strs = args
-    }
+    let strs = flattenDeep(args)
     return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
   }
 
