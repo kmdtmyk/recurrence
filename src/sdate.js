@@ -64,6 +64,11 @@ export default class{
     return o1.year == o2.year && o1.month == o2.month && o1.day == o2.day
   }
 
+  static isValid(str){
+    let date = new Date(str)
+    return date.toString() !== "Invalid Date"
+  }
+
   static min(...args){
     let strs = flattenDeep(args)
     return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)

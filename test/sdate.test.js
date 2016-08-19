@@ -73,6 +73,19 @@ describe('Sdate', () => {
     assert.ok(!Sdate.equal('2016/08/05', '2016/08/06'))
   })
 
+  it('isValid', () => {
+    assert.equal(Sdate.isValid('2016/01/05'), true)
+    assert.equal(Sdate.isValid('2016/1/5'), true)
+    assert.equal(Sdate.isValid('2016-01-05'), true)
+    assert.equal(Sdate.isValid('2016-1-5'), true)
+    assert.equal(Sdate.isValid('2016.01.05'), true)
+    assert.equal(Sdate.isValid('2016.1.5'), true)
+
+    assert.equal(Sdate.isValid('foo'), false)
+    assert.equal(Sdate.isValid('2016/99/05'), false)
+    assert.equal(Sdate.isValid('2016/01/99'), false)
+  })
+
   it('greaterThan', () => {
     assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/17'), true)
     assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/18'), false)
@@ -94,7 +107,7 @@ describe('Sdate', () => {
     assert.equal(Sdate.min(['2016/08/10', '2016/08/15']), '2016/08/10')
     assert.equal(Sdate.min(['2016/08/10', '2016/08/15', '2016/08/05']), '2016/08/05')
 
-    assert.equal(Sdate.min(['2016/08/10', '2016/08/15'], ['2016/08/05', '2016/07/25']), '2016/07/25')    
+    assert.equal(Sdate.min(['2016/08/10', '2016/08/15'], ['2016/08/05', '2016/07/25']), '2016/07/25')
   })
 
   it('startOfMonth', () => {
