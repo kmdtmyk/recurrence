@@ -59,6 +59,9 @@ export default class{
   }
 
   static equal(str1, str2){
+    if(this.isValid(str1) === false && this.isValid(str2) === false){
+      return true
+    }
     let o1 = this.toObject(str1)
     let o2 = this.toObject(str2)
     return o1.year == o2.year && o1.month == o2.month && o1.day == o2.day

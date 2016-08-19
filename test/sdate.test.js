@@ -65,12 +65,16 @@ describe('Sdate', () => {
   })
 
   it('equal', () => {
-    assert.ok(Sdate.equal('2016/08/05', '2016/8/5'))
-    assert.ok(Sdate.equal('2016/08/05', '2016-08-05'))
-    assert.ok(Sdate.equal('2016/08/05', '2016-8-5'))
-    assert.ok(Sdate.equal('2016/08/05', '2016.08.05'))
-    assert.ok(Sdate.equal('2016/08/05', '2016.8.5'))
-    assert.ok(!Sdate.equal('2016/08/05', '2016/08/06'))
+    assert.equal(Sdate.equal('2016/08/05', '2016/8/5'), true)
+    assert.equal(Sdate.equal('2016/08/05', '2016-08-05'), true)
+    assert.equal(Sdate.equal('2016/08/05', '2016-8-5'), true)
+    assert.equal(Sdate.equal('2016/08/05', '2016.08.05'), true)
+    assert.equal(Sdate.equal('2016/08/05', '2016.8.5'), true)
+    assert.equal(Sdate.equal('2016/08/05', '2016/08/06'), false)
+
+    assert.equal(Sdate.equal('2016/08/05', 'invalid'), false)
+    assert.equal(Sdate.equal('invalid', '2016/08/05'), false)
+    assert.equal(Sdate.equal('invalid', 'invalid'), true)
   })
 
   it('isValid', () => {
@@ -81,7 +85,7 @@ describe('Sdate', () => {
     assert.equal(Sdate.isValid('2016.01.05'), true)
     assert.equal(Sdate.isValid('2016.1.5'), true)
 
-    assert.equal(Sdate.isValid('foo'), false)
+    assert.equal(Sdate.isValid('invalid'), false)
     assert.equal(Sdate.isValid('2016/99/05'), false)
     assert.equal(Sdate.isValid('2016/01/99'), false)
   })
@@ -90,12 +94,18 @@ describe('Sdate', () => {
     assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/17'), true)
     assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/18'), false)
     assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/19'), false)
+
+    assert.equal(Sdate.greaterThan('invalid', '2016/08/18'), false)
+    assert.equal(Sdate.greaterThan('2016/08/18', 'invalid'), false)
   })
 
   it('lessThan', () => {
     assert.equal(Sdate.lessThan('2016/08/18', '2016/08/17'), false)
     assert.equal(Sdate.lessThan('2016/08/18', '2016/08/18'), false)
     assert.equal(Sdate.lessThan('2016/08/18', '2016/08/19'), true)
+
+    assert.equal(Sdate.lessThan('invalid', '2016/08/18'), false)
+    assert.equal(Sdate.lessThan('2016/08/18', 'invalid'), false)
   })
 
   it('max', () => {
