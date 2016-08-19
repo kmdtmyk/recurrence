@@ -98,6 +98,18 @@ describe('Sdate', () => {
     assert.equal(Sdate.lessThan('2016/08/18', '2016/08/19'), true)
   })
 
+  it('max', () => {
+    assert.equal(Sdate.max('2016/08/15'), '2016/08/15')
+    assert.equal(Sdate.max('2016/08/10', '2016/08/15'), '2016/08/15')
+    assert.equal(Sdate.max('2016/08/10', '2016/08/15', '2016/08/05'), '2016/08/15')
+
+    assert.equal(Sdate.max(['2016/08/15']), '2016/08/15')
+    assert.equal(Sdate.max(['2016/08/10', '2016/08/15']), '2016/08/15')
+    assert.equal(Sdate.max(['2016/08/10', '2016/08/15', '2016/08/05']), '2016/08/15')
+
+    assert.equal(Sdate.max(['2016/08/10', '2016/08/15'], ['2016/08/05', '2016/07/25']), '2016/08/15')
+  })
+
   it('min', () => {
     assert.equal(Sdate.min('2016/08/15'), '2016/08/15')
     assert.equal(Sdate.min('2016/08/10', '2016/08/15'), '2016/08/10')

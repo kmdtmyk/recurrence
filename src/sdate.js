@@ -69,6 +69,11 @@ export default class{
     return date.toString() !== "Invalid Date"
   }
 
+  static max(...args){
+    let strs = flattenDeep(args)
+    return strs.reduce((str1, str2) => this.greaterThan(str1, str2) ? str1 : str2)
+  }
+
   static min(...args){
     let strs = flattenDeep(args)
     return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
