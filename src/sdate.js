@@ -20,6 +20,14 @@ export default class{
     )
   }
 
+  static addYear(str, year){
+    let o = this.toObject(str)
+    return this.min(
+      this.create(o.year + year, o.month, o.day),
+      this.create(o.year + year, o.month + 1, 0)
+    )
+  }
+
   static create(year, month, day){
     let date = new Date(year, month - 1, day)
     return this.dateToString(date)
