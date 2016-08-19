@@ -73,6 +73,12 @@ describe('Sdate', () => {
     assert.ok(!Sdate.equal('2016/08/05', '2016/08/06'))
   })
 
+  it('greaterThan', () => {
+    assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/17'), true)
+    assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/18'), false)
+    assert.equal(Sdate.greaterThan('2016/08/18', '2016/08/19'), false)
+  })
+
   it('lessThan', () => {
     assert.equal(Sdate.lessThan('2016/08/18', '2016/08/17'), false)
     assert.equal(Sdate.lessThan('2016/08/18', '2016/08/18'), false)

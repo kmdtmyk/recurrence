@@ -73,6 +73,12 @@ export default class{
     return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
   }
 
+  static greaterThan(str1, str2){
+    let date1 = new Date(str1)
+    let date2 = new Date(str2)
+    return date1.valueOf() > date2.valueOf()
+  }
+
   static lessThan(str1, str2){
     let date1 = new Date(str1)
     let date2 = new Date(str2)
