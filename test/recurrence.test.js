@@ -15,7 +15,7 @@ describe('Recurrence', () => {
       assert.equal(r.include('2016/06/23'), true)
     })
 
-    it('daily　interval', () => {
+    it('daily interval', () => {
       let r = new Recurrence({
         startDate: '2016/06/22',
         interval: 2,

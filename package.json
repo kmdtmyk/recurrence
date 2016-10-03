@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
-    "prestart": "npm install",
+    "mocha": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
+    "karma": "karma start",
     "build": "webpack"
   },
   "keywords": [],
@@ -19,6 +19,11 @@
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.9.0",
+    "karma": "^1.3.0",
+    "karma-mocha": "^1.2.0",
+    "karma-mocha-debug": "^0.1.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
     "mocha": "^2.5.3",
     "webpack": "^1.13.1"
   },
