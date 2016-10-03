@@ -1,3 +1,4 @@
+import assert from 'power-assert'
 import Sdate from '../src/sdate.js'
 
 

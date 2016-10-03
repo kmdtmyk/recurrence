@@ -13,11 +13,16 @@ module.exports = {
     libraryTarget: 'umd',
   },
   module: {
+    exprContextCritical: false,
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
       },
     ],
   },

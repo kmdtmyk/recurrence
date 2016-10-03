@@ -1,3 +1,4 @@
+import assert from 'power-assert'
 import Recurrence from '../src/index.js'
 
 
