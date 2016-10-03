@@ -1,5 +1,5 @@
-import assert from 'assert'
 import Recurrence from '../src/index.js'
+
 
 describe('Recurrence', () => {
 

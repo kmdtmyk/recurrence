@@ -1,4 +1,7 @@
 {
   "presets": ["es2015"],
-  "plugins": ["add-module-exports"]
+  "plugins": [
+    "babel-plugin-espower",
+    "add-module-exports",
+  ]
 }

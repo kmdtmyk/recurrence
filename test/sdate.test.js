@@ -1,4 +1,3 @@
-import assert from 'assert'
 import Sdate from '../src/sdate.js'
 
 
