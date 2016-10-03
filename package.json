@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "mocha": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
-    "karma": "karma start",
+    "karma": "NODE_ENV=test karma start",
     "build": "webpack"
   },
   "keywords": [],
