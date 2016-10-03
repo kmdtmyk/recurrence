@@ -11,9 +11,9 @@ describe('Recurrence', () => {
         startDate: '2016/06/22',
       })
 
-      assert.equal(r.include('2016/06/21'), false)
-      assert.equal(r.include('2016/06/22'), true)
-      assert.equal(r.include('2016/06/23'), true)
+      assert(r.include('2016/06/21') === false)
+      assert(r.include('2016/06/22') === true)
+      assert(r.include('2016/06/23') === true)
     })
 
     it('daily interval', () => {
@@ -22,9 +22,9 @@ describe('Recurrence', () => {
         interval: 2,
       })
 
-      assert.equal(r.include('2016/06/22'), true)
-      assert.equal(r.include('2016/06/23'), false)
-      assert.equal(r.include('2016/06/24'), true)
+      assert(r.include('2016/06/22') === true)
+      assert(r.include('2016/06/23') === false)
+      assert(r.include('2016/06/24') === true)
     })
 
   })
@@ -36,10 +36,10 @@ describe('Recurrence', () => {
         startDate: '2016/07/13',
       })
 
-      assert.equal(r.next('2016/07/11'), '2016/07/13')
-      assert.equal(r.next('2016/07/12'), '2016/07/13')
-      assert.equal(r.next('2016/07/13'), '2016/07/14')
-      assert.equal(r.next('2016/07/14'), '2016/07/15')
+      assert(r.next('2016/07/11') === '2016/07/13')
+      assert(r.next('2016/07/12') === '2016/07/13')
+      assert(r.next('2016/07/13') === '2016/07/14')
+      assert(r.next('2016/07/14') === '2016/07/15')
     })
 
     it('daily interval', () => {
@@ -48,11 +48,11 @@ describe('Recurrence', () => {
         interval: 2,
       })
 
-      assert.equal(r.next('2016/07/11'), '2016/07/13')
-      assert.equal(r.next('2016/07/12'), '2016/07/13')
-      assert.equal(r.next('2016/07/13'), '2016/07/15')
-      assert.equal(r.next('2016/07/14'), '2016/07/15')
-      assert.equal(r.next('2016/07/15'), '2016/07/17')
+      assert(r.next('2016/07/11') === '2016/07/13')
+      assert(r.next('2016/07/12') === '2016/07/13')
+      assert(r.next('2016/07/13') === '2016/07/15')
+      assert(r.next('2016/07/14') === '2016/07/15')
+      assert(r.next('2016/07/15') === '2016/07/17')
     })
 
   })
