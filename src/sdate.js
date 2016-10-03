@@ -68,7 +68,7 @@ export default class{
   }
 
   static isValid(str){
-    let date = new Date(str)
+    let date = this.stringToDate(str)
     return date.toString() !== "Invalid Date"
   }
 
@@ -99,8 +99,12 @@ export default class{
     return this.create(o.year, o.month, 1)
   }
 
+  static stringToDate(str){
+    return new Date(str.replace(/[-.]/g, '/'))
+  }
+
   static toObject(str){
-    let date = new Date(str)
+    let date = this.stringToDate(str)
     let year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate()
