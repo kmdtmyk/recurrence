@@ -35,8 +35,8 @@ export default class{
   }
 
   static diffInDay(str1, str2){
-    let date1 = new Date(str1)
-    let date2 = new Date(str2)
+    let date1 = this.stringToDate(str1)
+    let date2 = this.stringToDate(str2)
     return (date2 - date1) / DAY
   }
 
@@ -83,15 +83,27 @@ export default class{
   }
 
   static greaterThan(str1, str2){
-    let date1 = new Date(str1)
-    let date2 = new Date(str2)
+    let date1 = this.stringToDate(str1)
+    let date2 = this.stringToDate(str2)
     return date1.valueOf() > date2.valueOf()
   }
 
+  static greaterThanOrEqual(str1, str2){
+    let date1 = this.stringToDate(str1)
+    let date2 = this.stringToDate(str2)
+    return date1.valueOf() >= date2.valueOf()
+  }
+
   static lessThan(str1, str2){
-    let date1 = new Date(str1)
-    let date2 = new Date(str2)
+    let date1 = this.stringToDate(str1)
+    let date2 = this.stringToDate(str2)
     return date1.valueOf() < date2.valueOf()
+  }
+
+  static lessThanOrEqual(str1, str2){
+    let date1 = this.stringToDate(str1)
+    let date2 = this.stringToDate(str2)
+    return date1.valueOf() <= date2.valueOf()
   }
 
   static startOfMonth(str){

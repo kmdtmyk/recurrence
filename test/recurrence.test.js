@@ -6,26 +6,58 @@ describe('Recurrence', () => {
 
   describe('includes', () => {
 
-    it('daily', () => {
-      const options = {
-        startDate: '2016/06/22',
-      }
+    describe('daily', () => {
 
-      assert(Recurrence.includes(options, '2016/06/21') === false)
-      assert(Recurrence.includes(options, '2016/06/22') === true)
-      assert(Recurrence.includes(options, '2016/06/23') === true)
+      it('startDate only', () => {
+        const options = {
+          startDate: '2016/06/22',
+        }
+
+        assert(Recurrence.includes(options, '2016/06/21') === false)
+        assert(Recurrence.includes(options, '2016/06/22') === true)
+        assert(Recurrence.includes(options, '2016/06/23') === true)
+      })
+
+      it('startDate and endDate', () => {
+        const options = {
+          startDate: '2016/06/22',
+          endDate: '2016/06/24',
+        }
+
+        assert(Recurrence.includes(options, '2016/06/21') === false)
+        assert(Recurrence.includes(options, '2016/06/22') === true)
+        assert(Recurrence.includes(options, '2016/06/23') === true)
+        assert(Recurrence.includes(options, '2016/06/24') === true)
+        assert(Recurrence.includes(options, '2016/06/25') === false)
+      })
+
+      it('interval', () => {
+        const options = {
+          startDate: '2016/06/22',
+          interval: 2,
+        }
+
+        assert(Recurrence.includes(options, '2016/06/22') === true)
+        assert(Recurrence.includes(options, '2016/06/23') === false)
+        assert(Recurrence.includes(options, '2016/06/24') === true)
+      })
+
+      it('different date format ', () => {
+        const options = {
+          startDate: '2016/06/01',
+        }
+
+        assert(Recurrence.includes(options, '2016/06/05') === true)
+        assert(Recurrence.includes(options, '2016-06-05') === true)
+        assert(Recurrence.includes(options, '2016.06.05') === true)
+        assert(Recurrence.includes(options, '2016/6/5') === true)
+        assert(Recurrence.includes(options, '2016-6-5') === true)
+        assert(Recurrence.includes(options, '2016.6.5') === true)
+      })
+
+
     })
 
-    it('daily interval', () => {
-      const options = {
-        startDate: '2016/06/22',
-        interval: 2,
-      }
-
-      assert(Recurrence.includes(options, '2016/06/22') === true)
-      assert(Recurrence.includes(options, '2016/06/23') === false)
-      assert(Recurrence.includes(options, '2016/06/24') === true)
-    })
 
   })
 

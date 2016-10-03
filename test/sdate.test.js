@@ -99,6 +99,15 @@ describe('Sdate', () => {
     assert(Sdate.greaterThan('2016/08/18', 'invalid') === false)
   })
 
+  it('greaterThanOrEqual', () => {
+    assert(Sdate.greaterThanOrEqual('2016/08/18', '2016/08/17') === true)
+    assert(Sdate.greaterThanOrEqual('2016/08/18', '2016/08/18') === true)
+    assert(Sdate.greaterThanOrEqual('2016/08/18', '2016/08/19') === false)
+
+    assert(Sdate.greaterThanOrEqual('invalid', '2016/08/18') === false)
+    assert(Sdate.greaterThanOrEqual('2016/08/18', 'invalid') === false)
+  })
+
   it('lessThan', () => {
     assert(Sdate.lessThan('2016/08/18', '2016/08/17') === false)
     assert(Sdate.lessThan('2016/08/18', '2016/08/18') === false)
@@ -106,6 +115,15 @@ describe('Sdate', () => {
 
     assert(Sdate.lessThan('invalid', '2016/08/18') === false)
     assert(Sdate.lessThan('2016/08/18', 'invalid') === false)
+  })
+
+  it('lessThanOrEqual', () => {
+    assert(Sdate.lessThanOrEqual('2016/08/18', '2016/08/17') === false)
+    assert(Sdate.lessThanOrEqual('2016/08/18', '2016/08/18') === true)
+    assert(Sdate.lessThanOrEqual('2016/08/18', '2016/08/19') === true)
+
+    assert(Sdate.lessThanOrEqual('invalid', '2016/08/18') === false)
+    assert(Sdate.lessThanOrEqual('2016/08/18', 'invalid') === false)
   })
 
   it('max', () => {
