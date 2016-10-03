@@ -14,7 +14,7 @@ export default class{
   }
 
   next(date){
-    
+
   }
 
 }

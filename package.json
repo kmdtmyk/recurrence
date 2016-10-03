@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
+    "start": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
+    "prestart": "npm install",
     "build": "webpack"
   },
   "keywords": [],

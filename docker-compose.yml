@@ -1,0 +1,9 @@
+version: '2'
+services:
+  node:
+    image: node:6.6-onbuild
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+volumes:
+  node_modules:
