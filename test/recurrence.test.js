@@ -4,27 +4,27 @@ import Recurrence from '../src/index.js'
 
 describe('Recurrence', () => {
 
-  describe('include', () => {
+  describe('includes', () => {
 
     it('daily', () => {
-      let r = new Recurrence({
+      const options = {
         startDate: '2016/06/22',
-      })
+      }
 
-      assert(r.include('2016/06/21') === false)
-      assert(r.include('2016/06/22') === true)
-      assert(r.include('2016/06/23') === true)
+      assert(Recurrence.includes(options, '2016/06/21') === false)
+      assert(Recurrence.includes(options, '2016/06/22') === true)
+      assert(Recurrence.includes(options, '2016/06/23') === true)
     })
 
     it('daily interval', () => {
-      let r = new Recurrence({
+      const options = {
         startDate: '2016/06/22',
         interval: 2,
-      })
+      }
 
-      assert(r.include('2016/06/22') === true)
-      assert(r.include('2016/06/23') === false)
-      assert(r.include('2016/06/24') === true)
+      assert(Recurrence.includes(options, '2016/06/22') === true)
+      assert(Recurrence.includes(options, '2016/06/23') === false)
+      assert(Recurrence.includes(options, '2016/06/24') === true)
     })
 
   })
