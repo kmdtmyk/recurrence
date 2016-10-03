@@ -1,24 +1,64 @@
 import Sdate from './sdate'
 
 
+const SUNDAY = 0
+const MONDAY = 1
+const TUESDAY = 2
+const WEDNESDAY = 3
+const THURSDAY = 4
+const FRIDAY = 5
+const SATURDAY = 6
+
 const defaultOptions = {
   interval: 1,
 }
 
-export default class{
+class Recurrence {
 
   static includes(options = {}, date){
     options = {...defaultOptions, ...options}
-    const { startDate, endDate, interval } = options
-    let isBetween = Sdate.lessThanOrEqual(startDate, date)
-    if(endDate){
-      isBetween = isBetween && Sdate.greaterThanOrEqual(endDate, date)
-    }
-    if(!isBetween){
+    if(this.__between(options, date) === false){
       return false
     }
+    const { every } = options
+    if(every === 'week'){
+      return this.__weekly(options, date)
+    }else{
+      return this.__daily(options, date)
+    }
+  }
+
+  static __between(options, date){
+    const { startDate, endDate } = options
+    if(endDate && Sdate.lessThan(endDate, date) ){
+      return false
+    }
+    return Sdate.lessThanOrEqual(startDate, date)
+  }
+
+  static __daily(options, date){
+    options = {...defaultOptions, ...options}
+    const { startDate, endDate, interval } = options
     const diffInDay = Sdate.diffInDay(startDate, date)
     return ( diffInDay % interval ) === 0
   }
 
+  static __weekly(options, date){
+    const { startDate, dayOfWeeks } = options
+    if(!dayOfWeeks){
+      return false
+    }
+    return dayOfWeeks.includes(Sdate.dayOfWeek(date))
+  }
+
 }
+
+Recurrence.SUNDAY = SUNDAY
+Recurrence.MONDAY = MONDAY
+Recurrence.TUESDAY = TUESDAY
+Recurrence.WEDNESDAY = WEDNESDAY
+Recurrence.THURSDAY = THURSDAY
+Recurrence.FRIDAY = FRIDAY
+Recurrence.SATURDAY = SATURDAY
+
+export default Recurrence

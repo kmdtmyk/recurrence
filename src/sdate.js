@@ -34,6 +34,11 @@ export default class{
     return this.dateToString(date)
   }
 
+  static dayOfWeek(str){
+    let o = this.toObject(str)
+    return o.dayOfWeek
+  }
+
   static diffInDay(str1, str2){
     let date1 = this.stringToDate(str1)
     let date2 = this.stringToDate(str2)
@@ -120,7 +125,8 @@ export default class{
     let year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate()
-    return {year, month, day}
+    let dayOfWeek = date.getDay()
+    return {year, month, day, dayOfWeek}
   }
 
 }

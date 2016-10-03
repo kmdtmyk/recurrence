@@ -45,6 +45,16 @@ describe('Sdate', () => {
     assert(Sdate.create(2016, 0, 1) === '2015/12/01')
   })
 
+  it('dayOfWeek', () => {
+    assert(Sdate.dayOfWeek('2016/10/16') === 0)
+    assert(Sdate.dayOfWeek('2016/10/17') === 1)
+    assert(Sdate.dayOfWeek('2016/10/18') === 2)
+    assert(Sdate.dayOfWeek('2016/10/19') === 3)
+    assert(Sdate.dayOfWeek('2016/10/20') === 4)
+    assert(Sdate.dayOfWeek('2016/10/21') === 5)
+    assert(Sdate.dayOfWeek('2016/10/22') === 6)
+  })
+
   it('diffInDay', () => {
     assert(Sdate.diffInDay('2016/06/21', '2016/06/20') === -1)
     assert(Sdate.diffInDay('2016/06/21', '2016/06/21') === 0)
@@ -157,7 +167,7 @@ describe('Sdate', () => {
   })
 
   it('toObject', () => {
-    assert.deepEqual(Sdate.toObject('2016/08/18'), {year: 2016, month: 8, day: 18})
+    assert.deepEqual(Sdate.toObject('2016/08/18'), {year: 2016, month: 8, day: 18, dayOfWeek: 4})
   })
 
 })

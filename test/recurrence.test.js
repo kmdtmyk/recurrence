@@ -58,6 +58,30 @@ describe('Recurrence', () => {
 
     })
 
+    describe('weekly', () => {
+
+      it('every monday', () => {
+        const options = {
+          startDate: '2016/10/01',
+          every: 'week',
+          dayOfWeeks: [Recurrence.MONDAY],
+        }
+
+        assert(Recurrence.includes(options, '2016/10/01') === false)
+        assert(Recurrence.includes(options, '2016/10/02') === false)
+        assert(Recurrence.includes(options, '2016/10/03') === true)
+        assert(Recurrence.includes(options, '2016/10/04') === false)
+        assert(Recurrence.includes(options, '2016/10/05') === false)
+        assert(Recurrence.includes(options, '2016/10/06') === false)
+        assert(Recurrence.includes(options, '2016/10/07') === false)
+        assert(Recurrence.includes(options, '2016/10/08') === false)
+        assert(Recurrence.includes(options, '2016/10/09') === false)
+        assert(Recurrence.includes(options, '2016/10/10') === true)
+        assert(Recurrence.includes(options, '2016/10/11') === false)
+      })
+
+    })
+
 
   })
 
