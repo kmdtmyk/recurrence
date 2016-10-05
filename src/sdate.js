@@ -34,6 +34,10 @@ export default class{
     return this.dateToString(date)
   }
 
+  static day(str){
+    return this.toObject(str).day
+  }
+
   static dayOfWeek(str){
     let o = this.toObject(str)
     return o.dayOfWeek
@@ -87,6 +91,10 @@ export default class{
     return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
   }
 
+  static month(str){
+    return this.toObject(str).month
+  }
+
   static greaterThan(str1, str2){
     let date1 = this.stringToDate(str1)
     let date2 = this.stringToDate(str2)
@@ -127,6 +135,10 @@ export default class{
     let day = date.getDate()
     let dayOfWeek = date.getDay()
     return {year, month, day, dayOfWeek}
+  }
+
+  static year(str){
+    return this.toObject(str).year
   }
 
 }
