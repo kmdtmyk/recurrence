@@ -136,12 +136,13 @@ describe('Recurrence', () => {
         assert(Recurrence.includes(options, '2016/10/30') === false)
         assert(Recurrence.includes(options, '2016/11/25') === false)
         assert(Recurrence.includes(options, '2017/10/25') === true)
+
       })
 
     })
 
-
   })
+
 
   xdescribe('next', () => {
 
@@ -169,6 +170,17 @@ describe('Recurrence', () => {
       assert(r.next('2016/07/15') === '2016/07/17')
     })
 
+  })
+
+
+  it('static const properties can not be assigned', () => {
+    assert.throws(() => {Recurrence.SUNDAY = 0}, TypeError)
+    assert.throws(() => {Recurrence.MONDAY = 0}, TypeError)
+    assert.throws(() => {Recurrence.TUESDAY = 0}, TypeError)
+    assert.throws(() => {Recurrence.WEDNESDAY = 0}, TypeError)
+    assert.throws(() => {Recurrence.THURSDAY = 0}, TypeError)
+    assert.throws(() => {Recurrence.FRIDAY = 0}, TypeError)
+    assert.throws(() => {Recurrence.SATURDAY = 0}, TypeError)
   })
 
 })

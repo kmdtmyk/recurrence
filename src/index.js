@@ -62,17 +62,39 @@ class Recurrence {
 
   static __yearly(options, date){
     const { startDate } = options
-    return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date) 
+    return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date)
+  }
+
+  static get SUNDAY(){
+    return SUNDAY
+  }
+
+  static get MONDAY(){
+    return MONDAY
+  }
+
+  static get TUESDAY(){
+    return TUESDAY
+  }
+
+  static get WEDNESDAY(){
+    return WEDNESDAY
+  }
+
+  static get THURSDAY(){
+    return THURSDAY
+  }
+
+  static get FRIDAY(){
+    return FRIDAY
+  }
+
+  static get SATURDAY(){
+    return SATURDAY
   }
 
 }
 
-Recurrence.SUNDAY = SUNDAY
-Recurrence.MONDAY = MONDAY
-Recurrence.TUESDAY = TUESDAY
-Recurrence.WEDNESDAY = WEDNESDAY
-Recurrence.THURSDAY = THURSDAY
-Recurrence.FRIDAY = FRIDAY
-Recurrence.SATURDAY = SATURDAY
+
 
 export default Recurrence
