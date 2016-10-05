@@ -9,12 +9,12 @@ const DAY = HOUR * 24
 export default class{
 
   static addDay(str, days){
-    let o = this.toObject(str)
+    const o = this.toObject(str)
     return this.create(o.year, o.month, o.day + days)
   }
 
   static addMonth(str, month){
-    let o = this.toObject(str)
+    const o = this.toObject(str)
     return this.min(
       this.create(o.year, o.month + month, o.day),
       this.create(o.year, o.month + month + 1, 0)
@@ -22,7 +22,7 @@ export default class{
   }
 
   static addYear(str, year){
-    let o = this.toObject(str)
+    const o = this.toObject(str)
     return this.min(
       this.create(o.year + year, o.month, o.day),
       this.create(o.year + year, o.month + 1, 0)
@@ -30,7 +30,7 @@ export default class{
   }
 
   static create(year, month, day){
-    let date = new Date(year, month - 1, day)
+    const date = new Date(year, month - 1, day)
     return this.dateToString(date)
   }
 
@@ -39,18 +39,18 @@ export default class{
   }
 
   static dayOfWeek(str){
-    let o = this.toObject(str)
+    const o = this.toObject(str)
     return o.dayOfWeek
   }
 
   static diffInDay(str1, str2){
-    let date1 = this.stringToDate(str1)
-    let date2 = this.stringToDate(str2)
+    const date1 = this.stringToDate(str1)
+    const date2 = this.stringToDate(str2)
     return (date2 - date1) / DAY
   }
 
   static dateToString(date){
-    let year = date.getFullYear()
+    const year = date.getFullYear()
     let month = date.getMonth() + 1
     let day = date.getDate()
     if(month < 10){
@@ -63,7 +63,7 @@ export default class{
   }
 
   static endOfMonth(str){
-    let o = this.toObject(str)
+    const o = this.toObject(str)
     return this.create(o.year, o.month + 1, 0)
   }
 
@@ -71,23 +71,23 @@ export default class{
     if(this.isValid(str1) === false && this.isValid(str2) === false){
       return true
     }
-    let o1 = this.toObject(str1)
-    let o2 = this.toObject(str2)
+    const o1 = this.toObject(str1)
+    const o2 = this.toObject(str2)
     return o1.year == o2.year && o1.month == o2.month && o1.day == o2.day
   }
 
   static isValid(str){
-    let date = this.stringToDate(str)
+    const date = this.stringToDate(str)
     return date.toString() !== "Invalid Date"
   }
 
   static max(...args){
-    let strs = flattenDeep(args)
+    const strs = flattenDeep(args)
     return strs.reduce((str1, str2) => this.greaterThan(str1, str2) ? str1 : str2)
   }
 
   static min(...args){
-    let strs = flattenDeep(args)
+    const strs = flattenDeep(args)
     return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
   }
 
@@ -96,31 +96,31 @@ export default class{
   }
 
   static greaterThan(str1, str2){
-    let date1 = this.stringToDate(str1)
-    let date2 = this.stringToDate(str2)
+    const date1 = this.stringToDate(str1)
+    const date2 = this.stringToDate(str2)
     return date1.valueOf() > date2.valueOf()
   }
 
   static greaterThanOrEqual(str1, str2){
-    let date1 = this.stringToDate(str1)
-    let date2 = this.stringToDate(str2)
+    const date1 = this.stringToDate(str1)
+    const date2 = this.stringToDate(str2)
     return date1.valueOf() >= date2.valueOf()
   }
 
   static lessThan(str1, str2){
-    let date1 = this.stringToDate(str1)
-    let date2 = this.stringToDate(str2)
+    const date1 = this.stringToDate(str1)
+    const date2 = this.stringToDate(str2)
     return date1.valueOf() < date2.valueOf()
   }
 
   static lessThanOrEqual(str1, str2){
-    let date1 = this.stringToDate(str1)
-    let date2 = this.stringToDate(str2)
+    const date1 = this.stringToDate(str1)
+    const date2 = this.stringToDate(str2)
     return date1.valueOf() <= date2.valueOf()
   }
 
   static startOfMonth(str){
-    let o = this.toObject(str)
+    const o = this.toObject(str)
     return this.create(o.year, o.month, 1)
   }
 
@@ -129,11 +129,11 @@ export default class{
   }
 
   static toObject(str){
-    let date = this.stringToDate(str)
-    let year = date.getFullYear()
-    let month = date.getMonth() + 1
-    let day = date.getDate()
-    let dayOfWeek = date.getDay()
+    const date = this.stringToDate(str)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const dayOfWeek = date.getDay()
     return {year, month, day, dayOfWeek}
   }
 
