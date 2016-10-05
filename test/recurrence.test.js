@@ -123,6 +123,23 @@ describe('Recurrence', () => {
 
     })
 
+    describe('yearly', () => {
+
+      it('10/25 of every year', () => {
+        const options = {
+          startDate: '2016/10/25',
+          every: 'year',
+        }
+
+        assert(Recurrence.includes(options, '2015/10/25') === false)
+        assert(Recurrence.includes(options, '2016/10/25') === true)
+        assert(Recurrence.includes(options, '2016/10/30') === false)
+        assert(Recurrence.includes(options, '2016/11/25') === false)
+        assert(Recurrence.includes(options, '2017/10/25') === true)
+      })
+
+    })
+
 
   })
 

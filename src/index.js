@@ -25,6 +25,8 @@ class Recurrence {
       return this.__weekly(options, date)
     }else if(every === 'month'){
       return this.__monthly(options, date)
+    }else if(every === 'year'){
+      return this.__yearly(options, date)
     }else{
       return this.__daily(options, date)
     }
@@ -56,6 +58,11 @@ class Recurrence {
   static __monthly(options, date){
     const { day } = options
     return Sdate.toObject(date).day === day
+  }
+
+  static __yearly(options, date){
+    const { startDate } = options
+    return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date) 
   }
 
 }
