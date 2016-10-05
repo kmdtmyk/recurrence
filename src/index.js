@@ -23,6 +23,8 @@ class Recurrence {
     const { every } = options
     if(every === 'week'){
       return this.__weekly(options, date)
+    }else if(every === 'month'){
+      return this.__monthly(options, date)
     }else{
       return this.__daily(options, date)
     }
@@ -49,6 +51,11 @@ class Recurrence {
       return false
     }
     return dayOfWeeks.includes(Sdate.dayOfWeek(date))
+  }
+
+  static __monthly(options, date){
+    const { day } = options
+    return Sdate.toObject(date).day === day
   }
 
 }

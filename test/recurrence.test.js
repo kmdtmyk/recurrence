@@ -106,6 +106,23 @@ describe('Recurrence', () => {
 
     })
 
+    describe('monthly', () => {
+
+      it('10th day of every month', () => {
+        const options = {
+          startDate: '2016/10/01',
+          every: 'month',
+          day: 10,
+        }
+
+        assert(Recurrence.includes(options, '2016/09/10') === false)
+        assert(Recurrence.includes(options, '2016/10/10') === true)
+        assert(Recurrence.includes(options, '2016/10/25') === false)
+        assert(Recurrence.includes(options, '2016/11/10') === true)
+      })
+
+    })
+
 
   })
 
