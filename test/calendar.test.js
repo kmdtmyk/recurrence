@@ -60,6 +60,48 @@ describe('Calendar', () => {
 
   describe('weekOfMonth', () => {
 
+    it('basic usage', () => {
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.SUNDAY) === 4)
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.MONDAY) === 4)
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.TUESDAY) === 5)
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.WEDNESDAY) === 5)
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.THURSDAY) === 5)
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.FRIDAY) === 1)
+      assert(Calendar.weekOfMonth('2016/01/01', Calendar.SATURDAY) === 4)
+
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.SUNDAY) === 4)
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.MONDAY) === 5)
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.TUESDAY) === 1)
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.WEDNESDAY) === 4)
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.THURSDAY) === 4)
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.FRIDAY) === 4)
+      assert(Calendar.weekOfMonth('2016/03/01', Calendar.SATURDAY) === 4)
+
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.SUNDAY) === 2)
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.MONDAY) === 2)
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.TUESDAY) === 3)
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.WEDNESDAY) === 2)
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.THURSDAY) === 2)
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.FRIDAY) === 2)
+      assert(Calendar.weekOfMonth('2016/03/15', Calendar.SATURDAY) === 2)
+    })
+
+    it('basisDayOfWeek is empty', () => {
+      assert(Calendar.weekOfMonth('2016/01/01') === 1)
+      assert(Calendar.weekOfMonth('2016/01/11') === 2)
+      assert(Calendar.weekOfMonth('2016/01/12') === 2)
+      assert(Calendar.weekOfMonth('2016/01/13') === 2)
+      assert(Calendar.weekOfMonth('2016/01/14') === 2)
+      assert(Calendar.weekOfMonth('2016/01/15') === 3)
+      assert(Calendar.weekOfMonth('2016/01/16') === 3)
+      assert(Calendar.weekOfMonth('2016/01/17') === 3)
+      assert(Calendar.weekOfMonth('2016/01/31') === 5)
+    })
+
+    it('invalid argument', () => {
+      assert(isNaN(Calendar.weekOfMonth('invalid')))
+    })
+
   })
 
 })

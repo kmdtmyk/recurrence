@@ -25,4 +25,17 @@ export default class extends DayOfWeek {
     return date
   }
 
+  static weekOfMonth(date, dayOfWeek){
+    if(Sdate.isValid(date) === false){
+      return NaN
+    }
+    if(dayOfWeek === undefined || dayOfWeek === null){
+      dayOfWeek = Sdate.dayOfWeek(Sdate.startOfMonth(date))
+    }else if(DayOfWeek.isValidDayOfWeek(dayOfWeek) === false){
+      return NaN
+    }
+    const diffInDay = Sdate.diffInDay(this.startOfMonth(this.startOfWeek(date, dayOfWeek), dayOfWeek), date)
+    return Math.floor(diffInDay / 7)
+  }
+
 }
