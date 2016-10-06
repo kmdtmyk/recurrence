@@ -1,19 +1,12 @@
 import Sdate from './sdate'
+import DayOfWeek from './DayOfWeek'
 
-
-const SUNDAY = 0
-const MONDAY = 1
-const TUESDAY = 2
-const WEDNESDAY = 3
-const THURSDAY = 4
-const FRIDAY = 5
-const SATURDAY = 6
 
 const defaultOptions = {
   interval: 1,
 }
 
-class Recurrence {
+class Recurrence extends DayOfWeek {
 
   static includes(options = {}, date){
     options = {...defaultOptions, ...options}
@@ -63,34 +56,6 @@ class Recurrence {
   static __yearly(options, date){
     const { startDate } = options
     return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date)
-  }
-
-  static get SUNDAY(){
-    return SUNDAY
-  }
-
-  static get MONDAY(){
-    return MONDAY
-  }
-
-  static get TUESDAY(){
-    return TUESDAY
-  }
-
-  static get WEDNESDAY(){
-    return WEDNESDAY
-  }
-
-  static get THURSDAY(){
-    return THURSDAY
-  }
-
-  static get FRIDAY(){
-    return FRIDAY
-  }
-
-  static get SATURDAY(){
-    return SATURDAY
   }
 
 }

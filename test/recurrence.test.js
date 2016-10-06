@@ -1,5 +1,6 @@
 import assert from 'power-assert'
-import Recurrence from '../src/index.js'
+import Recurrence from '../src/index'
+import DayOfWeek from '../src/DayOfWeek'
 
 
 describe('Recurrence', () => {
@@ -143,7 +144,6 @@ describe('Recurrence', () => {
 
   })
 
-
   xdescribe('next', () => {
 
     it('daily', () => {
@@ -172,6 +172,15 @@ describe('Recurrence', () => {
 
   })
 
+  it('inheritance properties from DayOfWeek', () => {
+    assert(Recurrence.SUNDAY === DayOfWeek.SUNDAY)
+    assert(Recurrence.MONDAY === DayOfWeek.MONDAY)
+    assert(Recurrence.TUESDAY === DayOfWeek.TUESDAY)
+    assert(Recurrence.WEDNESDAY === DayOfWeek.WEDNESDAY)
+    assert(Recurrence.THURSDAY === DayOfWeek.THURSDAY)
+    assert(Recurrence.FRIDAY === DayOfWeek.FRIDAY)
+    assert(Recurrence.SATURDAY === DayOfWeek.SATURDAY)
+  })
 
   it('static const properties can not be assigned', () => {
     assert.throws(() => {Recurrence.SUNDAY = 0}, TypeError)
