@@ -39,4 +39,16 @@ export default class {
     return SATURDAY
   }
 
+  static isValidDayOfWeek(dayOfWeek){
+    return (
+      dayOfWeek === SUNDAY ||
+      dayOfWeek === MONDAY ||
+      dayOfWeek === TUESDAY ||
+      dayOfWeek === WEDNESDAY ||
+      dayOfWeek === THURSDAY ||
+      dayOfWeek === FRIDAY ||
+      dayOfWeek === SATURDAY
+    )
+  }
+
 }

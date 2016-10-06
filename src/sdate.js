@@ -6,7 +6,7 @@ const HOUR = MINUTE * 60
 const DAY = HOUR * 24
 
 
-export default class{
+export default class {
 
   static addDay(str, days){
     const o = this.toObject(str)
