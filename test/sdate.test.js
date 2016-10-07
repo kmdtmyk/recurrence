@@ -93,7 +93,7 @@ describe('Sdate', () => {
 
     assert(Sdate.equal('2016/08/05', 'invalid') === false)
     assert(Sdate.equal('invalid', '2016/08/05') === false)
-    assert(Sdate.equal('invalid', 'invalid') === true)
+    assert(Sdate.equal('invalid', 'invalid') === false)
   })
 
   it('isValid', () => {

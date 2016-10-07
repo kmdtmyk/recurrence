@@ -68,8 +68,8 @@ export default class {
   }
 
   static equal(str1, str2){
-    if(this.isValid(str1) === false && this.isValid(str2) === false){
-      return true
+    if(this.isValid(str1) === false || this.isValid(str2) === false){
+      return false
     }
     const o1 = this.toObject(str1)
     const o2 = this.toObject(str2)
