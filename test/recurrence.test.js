@@ -247,6 +247,30 @@ describe('Recurrence', () => {
         assert(Recurrence.includes(options, '2016/12/12') === false)
       })
 
+      it('5th monday with basis sunday', () => {
+        const options = {
+          startDate: '2016/05/30',
+          every: 'month',
+          basisDayOfWeek: Recurrence.SUNDAY,
+          dayOfWeeks: [
+            Recurrence.MONDAY,
+            Recurrence.WEDNESDAY,
+            Recurrence.FRIDAY,
+          ],
+        }
+        assert(Recurrence.includes(options, '2017/01/30') === true)
+        assert(Recurrence.includes(options, '2017/03/06') === false)
+        assert(Recurrence.includes(options, '2017/04/03') === false)
+        assert(Recurrence.includes(options, '2017/05/01') === true)
+        assert(Recurrence.includes(options, '2017/06/05') === false)
+        assert(Recurrence.includes(options, '2017/07/03') === false)
+        assert(Recurrence.includes(options, '2017/07/31') === true)
+        assert(Recurrence.includes(options, '2017/09/04') === false)
+        assert(Recurrence.includes(options, '2017/10/02') === false)
+        assert(Recurrence.includes(options, '2017/10/30') === true)
+        assert(Recurrence.includes(options, '2017/12/04') === false)
+      })
+
     })
 
     describe('yearly', () => {
