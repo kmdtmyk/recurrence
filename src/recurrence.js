@@ -54,30 +54,14 @@ export default class extends DayOfWeek {
   }
 
   static __monthly(options, date){
-    if(options.dayOfWeeks){
-      return this.__monthlyDayOfWeek(options, date)
-    }else{
-      return this.__monthlyDay(options, date)
-    }
-  }
-
-  static __monthlyDay(options, date){
-    const { startDate, interval } = options
-    if(Sdate.diffInMonth(startDate, date) % interval !== 0){
-      return false
-    }
-    return Sdate.day(startDate) === Sdate.day(date)
-  }
-
-  static __monthlyDayOfWeek(options, date){
     const { startDate, interval, dayOfWeeks, basisDayOfWeek } = options
     if(Sdate.diffInMonth(startDate, date) % interval !== 0){
       return false
     }
-    if(Calendar.weekOfMonth(startDate, basisDayOfWeek) !== Calendar.weekOfMonth(date, basisDayOfWeek)){
-      return false
+    if(dayOfWeeks){
+      return dayOfWeeks.includes(Sdate.dayOfWeek(date)) && Calendar.weekOfMonth(startDate, basisDayOfWeek) === Calendar.weekOfMonth(date, basisDayOfWeek)
     }
-    return dayOfWeeks.includes(Sdate.dayOfWeek(date))
+    return Sdate.day(startDate) === Sdate.day(date)
   }
 
   static __yearly(options, date){
