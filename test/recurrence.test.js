@@ -288,10 +288,16 @@ describe('Recurrence', () => {
           ],
         }
         assert(Recurrence.includes(options, '2016/06/06') === false)
+        assert(Recurrence.includes(options, '2016/06/07') === false)
         assert(Recurrence.includes(options, '2016/06/08') === true)
+        assert(Recurrence.includes(options, '2016/06/09') === false)
         assert(Recurrence.includes(options, '2016/06/10') === true)
+        assert(Recurrence.includes(options, '2016/06/11') === false)
+        assert(Recurrence.includes(options, '2016/06/12') === false)
         assert(Recurrence.includes(options, '2016/06/13') === true)
+        assert(Recurrence.includes(options, '2016/06/14') === false)
         assert(Recurrence.includes(options, '2016/06/15') === false)
+        assert(Recurrence.includes(options, '2016/06/16') === false)
         assert(Recurrence.includes(options, '2016/06/17') === false)
 
         assert(Recurrence.includes(options, '2017/06/05') === false)

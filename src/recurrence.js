@@ -70,7 +70,7 @@ export default class extends DayOfWeek {
       return false
     }
     if(dayOfWeeks){
-      return Calendar.weekOfMonth(startDate, basisDayOfWeek) === Calendar.weekOfMonth(date, basisDayOfWeek)
+      return dayOfWeeks.includes(Sdate.dayOfWeek(date)) && Calendar.weekOfMonth(startDate, basisDayOfWeek) === Calendar.weekOfMonth(date, basisDayOfWeek)
     }
     return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date)
   }
