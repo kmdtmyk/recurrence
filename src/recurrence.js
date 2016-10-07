@@ -70,11 +70,11 @@ export default class extends DayOfWeek {
   }
 
   static __monthlyDayOfWeek(options, date){
-    const { startDate, interval, dayOfWeeks } = options
+    const { startDate, interval, dayOfWeeks, basisDayOfWeek } = options
     if(Sdate.diffInMonth(startDate, date) % interval !== 0){
       return false
     }
-    if(Calendar.weekOfMonth(startDate) !== Calendar.weekOfMonth(date)){
+    if(Calendar.weekOfMonth(startDate, basisDayOfWeek) !== Calendar.weekOfMonth(date, basisDayOfWeek)){
       return false
     }
     return dayOfWeeks.includes(Sdate.dayOfWeek(date))
