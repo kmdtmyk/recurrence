@@ -197,7 +197,7 @@ describe('Recurrence', () => {
         assert(Recurrence.includes(options, '2016/12/16') === false)
       })
 
-      it('2nd monday, wednesday and friday every tow months', () => {
+      it('2nd monday, wednesday and friday every two months', () => {
         const options = {
           startDate: '2016/10/10',
           every: 'month',
