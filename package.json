@@ -2,7 +2,7 @@
   "name": "recurrence",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "recurrence.js",
   "scripts": {
     "mocha": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
     "karma": "NODE_ENV=test karma start",

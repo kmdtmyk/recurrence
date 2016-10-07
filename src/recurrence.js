@@ -1,6 +1,6 @@
 import Sdate from './sdate'
 import Calendar from './calendar'
-import DayOfWeek from './DayOfWeek'
+import DayOfWeek from './day-of-week'
 
 
 const defaultOptions = {
@@ -36,7 +36,7 @@ class Recurrence extends DayOfWeek {
 
   static __daily(options, date){
     options = {...defaultOptions, ...options}
-    const { startDate, endDate, interval } = options
+    const { startDate, interval } = options
     const diffInDay = Sdate.diffInDay(startDate, date)
     return ( diffInDay % interval ) === 0
   }

@@ -1,5 +1,5 @@
 import Sdate from './sdate'
-import DayOfWeek from './DayOfWeek'
+import DayOfWeek from './day-of-week'
 
 
 export default class extends DayOfWeek {

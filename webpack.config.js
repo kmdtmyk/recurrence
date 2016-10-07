@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   context: __dirname,
   entry: {
-    recurrence: './src/index',
+    recurrence: './src/recurrence',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
