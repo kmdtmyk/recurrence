@@ -81,9 +81,12 @@ export default class extends DayOfWeek {
   }
 
   static __yearly(options, date){
-    const { startDate, interval } = options
+    const { startDate, interval, dayOfWeeks, basisDayOfWeek } = options
     if(Sdate.diffInYear(startDate, date) % interval !== 0){
       return false
+    }
+    if(dayOfWeeks){
+      return Calendar.weekOfMonth(startDate, basisDayOfWeek) === Calendar.weekOfMonth(date, basisDayOfWeek)
     }
     return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date)
   }

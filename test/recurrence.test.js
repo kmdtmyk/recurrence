@@ -277,6 +277,82 @@ describe('Recurrence', () => {
         assert(Recurrence.includes(options, '2019/10/25') === false)
       })
 
+      it('2nd monday, wednesday and friday of every July', () => {
+        const options = {
+          startDate: '2016/06/08',
+          every: 'year',
+          dayOfWeeks: [
+            Recurrence.MONDAY,
+            Recurrence.WEDNESDAY,
+            Recurrence.FRIDAY,
+          ],
+        }
+        assert(Recurrence.includes(options, '2016/06/06') === false)
+        assert(Recurrence.includes(options, '2016/06/08') === true)
+        assert(Recurrence.includes(options, '2016/06/10') === true)
+        assert(Recurrence.includes(options, '2016/06/13') === true)
+        assert(Recurrence.includes(options, '2016/06/15') === false)
+        assert(Recurrence.includes(options, '2016/06/17') === false)
+
+        assert(Recurrence.includes(options, '2017/06/05') === false)
+        assert(Recurrence.includes(options, '2017/06/07') === false)
+        assert(Recurrence.includes(options, '2017/06/09') === true)
+        assert(Recurrence.includes(options, '2017/06/12') === true)
+        assert(Recurrence.includes(options, '2017/06/14') === true)
+        assert(Recurrence.includes(options, '2017/06/16') === false)
+      })
+
+      it('2nd monday, wednesday and friday of every July with basis sunday', () => {
+        const options = {
+          startDate: '2016/06/15',
+          every: 'year',
+          basisDayOfWeek: Recurrence.SUNDAY,
+          dayOfWeeks: [
+            Recurrence.MONDAY,
+            Recurrence.WEDNESDAY,
+            Recurrence.FRIDAY,
+          ],
+        }
+        assert(Recurrence.includes(options, '2016/06/13') === false)
+        assert(Recurrence.includes(options, '2016/06/15') === true)
+        assert(Recurrence.includes(options, '2016/06/17') === true)
+        assert(Recurrence.includes(options, '2016/06/20') === false)
+
+        assert(Recurrence.includes(options, '2017/06/09') === false)
+        assert(Recurrence.includes(options, '2017/06/12') === true)
+        assert(Recurrence.includes(options, '2017/06/14') === true)
+        assert(Recurrence.includes(options, '2017/06/16') === true)
+        assert(Recurrence.includes(options, '2017/06/19') === false)
+      })
+
+      it('2nd monday, wednesday and friday of every two July with basis sunday', () => {
+        const options = {
+          startDate: '2016/06/15',
+          every: 'year',
+          basisDayOfWeek: Recurrence.SUNDAY,
+          interval: 2,
+          dayOfWeeks: [
+            Recurrence.MONDAY,
+            Recurrence.WEDNESDAY,
+            Recurrence.FRIDAY,
+          ],
+        }
+        assert(Recurrence.includes(options, '2016/06/13') === false)
+        assert(Recurrence.includes(options, '2016/06/15') === true)
+        assert(Recurrence.includes(options, '2016/06/17') === true)
+        assert(Recurrence.includes(options, '2016/06/20') === false)
+
+        assert(Recurrence.includes(options, '2017/06/12') === false)
+        assert(Recurrence.includes(options, '2017/06/14') === false)
+        assert(Recurrence.includes(options, '2017/06/16') === false)
+
+        assert(Recurrence.includes(options, '2018/06/08') === false)
+        assert(Recurrence.includes(options, '2018/06/11') === true)
+        assert(Recurrence.includes(options, '2018/06/13') === true)
+        assert(Recurrence.includes(options, '2018/06/15') === true)
+        assert(Recurrence.includes(options, '2018/06/18') === false)
+      })
+
     })
 
   })
