@@ -7,7 +7,7 @@ const defaultOptions = {
   interval: 1,
 }
 
-class Recurrence extends DayOfWeek {
+export default class extends DayOfWeek {
 
   static includes(options = {}, date){
     options = {...defaultOptions, ...options}
@@ -54,8 +54,30 @@ class Recurrence extends DayOfWeek {
   }
 
   static __monthly(options, date){
-    const { day } = options
-    return Sdate.toObject(date).day === day
+    if(options.dayOfWeeks){
+      return this.__monthlyDayOfWeek(options, date)
+    }else{
+      return this.__monthlyDay(options, date)
+    }
+  }
+
+  static __monthlyDay(options, date){
+    const { startDate, interval } = options
+    if(Sdate.diffInMonth(startDate, date) % interval !== 0){
+      return false
+    }
+    return Sdate.day(startDate) === Sdate.day(date)
+  }
+
+  static __monthlyDayOfWeek(options, date){
+    const { startDate, interval, dayOfWeeks } = options
+    if(Sdate.diffInMonth(startDate, date) % interval !== 0){
+      return false
+    }
+    if(Calendar.weekOfMonth(startDate) !== Calendar.weekOfMonth(date)){
+      return false
+    }
+    return dayOfWeeks.includes(Sdate.dayOfWeek(date))
   }
 
   static __yearly(options, date){
@@ -64,7 +86,3 @@ class Recurrence extends DayOfWeek {
   }
 
 }
-
-
-
-export default Recurrence

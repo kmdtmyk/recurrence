@@ -51,7 +51,6 @@ describe('Recurrence', () => {
         assert(Recurrence.includes(options, '2016.6.5') === true)
       })
 
-
     })
 
     describe('weekly', () => {
@@ -148,16 +147,82 @@ describe('Recurrence', () => {
 
     describe('monthly', () => {
 
-      it('10th day of every month', () => {
+      it('10th day of every months', () => {
         const options = {
-          startDate: '2016/10/01',
+          startDate: '2016/10/10',
           every: 'month',
-          day: 10,
         }
         assert(Recurrence.includes(options, '2016/09/10') === false)
         assert(Recurrence.includes(options, '2016/10/10') === true)
         assert(Recurrence.includes(options, '2016/10/25') === false)
         assert(Recurrence.includes(options, '2016/11/10') === true)
+      })
+
+      it('15th day of every two months', () => {
+        const options = {
+          startDate: '2016/10/15',
+          every: 'month',
+          interval: 2,
+        }
+        assert(Recurrence.includes(options, '2016/09/15') === false)
+        assert(Recurrence.includes(options, '2016/10/15') === true)
+        assert(Recurrence.includes(options, '2016/11/15') === false)
+        assert(Recurrence.includes(options, '2016/12/15') === true)
+      })
+
+      it('2nd monday, wednesday and friday every months', () => {
+        const options = {
+          startDate: '2016/10/10',
+          every: 'month',
+          dayOfWeeks: [
+            Recurrence.MONDAY,
+            Recurrence.WEDNESDAY,
+            Recurrence.FRIDAY,
+          ],
+        }
+        assert(Recurrence.includes(options, '2016/10/10') === true)
+        assert(Recurrence.includes(options, '2016/10/11') === false)
+        assert(Recurrence.includes(options, '2016/10/12') === true)
+        assert(Recurrence.includes(options, '2016/10/13') === false)
+        assert(Recurrence.includes(options, '2016/10/14') === true)
+
+        assert(Recurrence.includes(options, '2016/11/07') === false)
+        assert(Recurrence.includes(options, '2016/11/09') === true)
+        assert(Recurrence.includes(options, '2016/11/11') === true)
+        assert(Recurrence.includes(options, '2016/11/14') === true)
+
+        assert(Recurrence.includes(options, '2016/12/09') === true)
+        assert(Recurrence.includes(options, '2016/12/12') === true)
+        assert(Recurrence.includes(options, '2016/12/14') === true)
+        assert(Recurrence.includes(options, '2016/12/16') === false)
+      })
+
+      it('2nd monday, wednesday and friday every tow months', () => {
+        const options = {
+          startDate: '2016/10/10',
+          every: 'month',
+          interval: 2,
+          dayOfWeeks: [
+            Recurrence.MONDAY,
+            Recurrence.WEDNESDAY,
+            Recurrence.FRIDAY,
+          ],
+        }
+        assert(Recurrence.includes(options, '2016/10/10') === true)
+        assert(Recurrence.includes(options, '2016/10/11') === false)
+        assert(Recurrence.includes(options, '2016/10/12') === true)
+        assert(Recurrence.includes(options, '2016/10/13') === false)
+        assert(Recurrence.includes(options, '2016/10/14') === true)
+
+        assert(Recurrence.includes(options, '2016/11/07') === false)
+        assert(Recurrence.includes(options, '2016/11/09') === false)
+        assert(Recurrence.includes(options, '2016/11/11') === false)
+        assert(Recurrence.includes(options, '2016/11/14') === false)
+
+        assert(Recurrence.includes(options, '2016/12/09') === true)
+        assert(Recurrence.includes(options, '2016/12/12') === true)
+        assert(Recurrence.includes(options, '2016/12/14') === true)
+        assert(Recurrence.includes(options, '2016/12/16') === false)
       })
 
     })
