@@ -50,12 +50,15 @@ export default class {
   }
 
   static diffInMonth(str1, str2){
-    const year1 = this.year(str1)
-    const year2 = this.year(str2)
     const month1 = this.month(str1)
     const month2 = this.month(str2)
-    return (year2 - year1) * 12 + month2 - month1
-    // ( Year ( date2 ) - Year ( date1 ) ) * 12 + Month ( date2 ) - Month ( date1 )
+    return (this.diffInYear(str1, str2)) * 12 + month2 - month1
+  }
+
+  static diffInYear(str1, str2){
+    const year1 = this.year(str1)
+    const year2 = this.year(str2)
+    return year2 - year1
   }
 
   static dateToString(date){

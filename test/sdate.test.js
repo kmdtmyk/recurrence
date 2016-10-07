@@ -81,6 +81,15 @@ describe('Sdate', () => {
     assert(Sdate.diffInMonth('2015/10/15', '2014/10/15') === -12)
   })
 
+  it('diffInYear', () => {
+    assert(Sdate.diffInYear('2016/01/01', '2016/01/01') === 0)
+    assert(Sdate.diffInYear('2016/01/01', '2015/12/31') === -1)
+    assert(Sdate.diffInYear('2016/01/01', '2015/05/25') === -1)
+    assert(Sdate.diffInYear('2016/01/01', '2016/12/31') === 0)
+    assert(Sdate.diffInYear('2016/01/01', '2017/01/01') === 1)
+    assert(Sdate.diffInYear('2016/01/01', '2017/05/25') === 1)
+  })
+
   it('dateToString', () => {
     assert(Sdate.dateToString(new Date('2016/01/01')) === '2016/01/01')
     assert(Sdate.dateToString(new Date('2016/12/10')) === '2016/12/10')
