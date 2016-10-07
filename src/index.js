@@ -1,4 +1,5 @@
 import Sdate from './sdate'
+import Calendar from './calendar'
 import DayOfWeek from './DayOfWeek'
 
 
@@ -41,8 +42,12 @@ class Recurrence extends DayOfWeek {
   }
 
   static __weekly(options, date){
-    const { startDate, dayOfWeeks } = options
+    const { startDate, dayOfWeeks, interval, basisDayOfWeek } = options
     if(!dayOfWeeks){
+      return false
+    }
+    const diffInWeek = Calendar.diffInWeek(startDate, date, basisDayOfWeek)
+    if(diffInWeek % interval !== 0){
       return false
     }
     return dayOfWeeks.includes(Sdate.dayOfWeek(date))
