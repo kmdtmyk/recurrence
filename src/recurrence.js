@@ -125,4 +125,20 @@ export default class extends DayOfWeek {
     return true
   }
 
+  static extract(options, start, end){
+    let result = []
+    let date = Sdate.addDay(start, -1)
+    let i = 0
+    const limit = 10000
+    while(i < limit){
+      i++
+      date = this.next(options, date, 1)
+      if(!date || Sdate.lessThan(end, date)){
+        break
+      }
+      result.push(date)
+    }
+    return result
+  }
+
 }

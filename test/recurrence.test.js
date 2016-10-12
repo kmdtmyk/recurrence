@@ -558,6 +558,114 @@ describe('Recurrence', () => {
 
   })
 
+  describe('extract', () => {
+
+    it('daily', () => {
+      const options = {
+        startDate: '2016/05/11',
+        endDate: '2016/05/15',
+      }
+      assert.deepEqual(Recurrence.extract(options, '2016/05/05', '2016/05/13'), [
+        '2016/05/11',
+        '2016/05/12',
+        '2016/05/13',
+      ])
+      assert.deepEqual(Recurrence.extract(options, '2016/05/13', '2016/05/20'), [
+        '2016/05/13',
+        '2016/05/14',
+        '2016/05/15',
+      ])
+      assert.deepEqual(Recurrence.extract(options, '2016/05/05', '2016/05/20'), [
+        '2016/05/11',
+        '2016/05/12',
+        '2016/05/13',
+        '2016/05/14',
+        '2016/05/15',
+      ])
+      assert.deepEqual(Recurrence.extract(options, '2016/05/20', '2016/05/30'), [])
+    })
+
+    it('every three days', () => {
+      const options = {
+        startDate: '2016/10/11',
+        endDate: '2016/10/20',
+        interval: 3,
+      }
+      assert.deepEqual(Recurrence.extract(options, '2016/10/01', '2016/10/31'), [
+        '2016/10/11',
+        '2016/10/14',
+        '2016/10/17',
+        '2016/10/20',
+      ])
+    })
+
+    it('tuesday, thursday and saturday', () => {
+      const options = {
+        startDate: '2016/10/11',
+        endDate: '2016/10/23',
+        every: 'week',
+        dayOfWeeks: [
+          Recurrence.TUESDAY,
+          Recurrence.THURSDAY,
+          Recurrence.SATURDAY,
+        ],
+      }
+      assert.deepEqual(Recurrence.extract(options, '2016/10/01', '2016/10/31'), [
+        '2016/10/11',
+        '2016/10/13',
+        '2016/10/15',
+        '2016/10/18',
+        '2016/10/20',
+        '2016/10/22',
+      ])
+    })
+
+    it('tuesday, thursday and saturday of two weeks', () => {
+      const options = {
+        startDate: '2016/10/11',
+        endDate: '2016/10/30',
+        every: 'week',
+        interval: 2,
+        dayOfWeeks: [
+          Recurrence.TUESDAY,
+          Recurrence.THURSDAY,
+          Recurrence.SATURDAY,
+        ],
+      }
+      assert.deepEqual(Recurrence.extract(options, '2016/10/01', '2016/10/31'), [
+        '2016/10/11',
+        '2016/10/13',
+        '2016/10/15',
+        '2016/10/25',
+        '2016/10/27',
+        '2016/10/29',
+      ])
+    })
+
+    xit('', () => {
+      const options = {
+        startDate: '2016/10/11',
+        endDate: '2016/10/30',
+        every: 'week',
+        interval: 2,
+        dayOfWeeks: [
+          Recurrence.TUESDAY,
+          Recurrence.THURSDAY,
+          Recurrence.SATURDAY,
+        ],
+      }
+      assert.deepEqual(Recurrence.extract(options, '2016/10/01', '2016/10/31'), [
+        '2016/10/11',
+        '2016/10/13',
+        '2016/10/15',
+        '2016/10/25',
+        '2016/10/27',
+        '2016/10/29',
+      ])
+    })
+
+  })
+
   it('inheritance properties from DayOfWeek', () => {
     assert(Recurrence.SUNDAY === Recurrence.SUNDAY)
     assert(Recurrence.MONDAY === Recurrence.MONDAY)
