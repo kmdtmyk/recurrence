@@ -95,12 +95,16 @@ export default class {
 
   static max(...args){
     const strs = flattenDeep(args)
-    return strs.reduce((str1, str2) => this.greaterThan(str1, str2) ? str1 : str2)
+    return strs
+      .filter((str) => this.isValid(str))
+      .reduce((str1, str2) => this.greaterThan(str1, str2) ? str1 : str2)
   }
 
   static min(...args){
     const strs = flattenDeep(args)
-    return strs.reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
+    return strs
+    .filter((str) => this.isValid(str))
+    .reduce((str1, str2) => this.lessThan(str1, str2) ? str1 : str2)
   }
 
   static month(str){
@@ -136,7 +140,10 @@ export default class {
     return this.create(o.year, o.month, 1)
   }
 
-  static stringToDate(str = ''){
+  static stringToDate(str){
+    if(typeof str !== 'string'){
+      return new Date('')
+    }
     return new Date(str.replace(/[-.]/g, '/'))
   }
 

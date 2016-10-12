@@ -425,6 +425,127 @@ describe('Recurrence', () => {
       assert(Recurrence.next(options, '2015/06/13', -3) === '')
     })
 
+    it('alternate days', () => {
+      const options = {
+        startDate: '2015/06/11',
+        endDate: '2015/06/15',
+        every: 'day',
+        interval: 2,
+      }
+      assert(Recurrence.next(options, '2015/06/01', 1) === '2015/06/11')
+      assert(Recurrence.next(options, '2015/06/01', 2) === '2015/06/13')
+      assert(Recurrence.next(options, '2015/06/01', 3) === '2015/06/15')
+      assert(Recurrence.next(options, '2015/06/01', 4) === '')
+
+      assert(Recurrence.next(options, '2015/06/30', -1) === '2015/06/15')
+      assert(Recurrence.next(options, '2015/06/30', -2) === '2015/06/13')
+      assert(Recurrence.next(options, '2015/06/30', -3) === '2015/06/11')
+      assert(Recurrence.next(options, '2015/06/30', -4) === '')
+    })
+
+    it('monday, wednesday and friday', () => {
+      const options = {
+        startDate: '2015/12/01',
+        endDate: '2015/12/31',
+        every: 'week',
+        dayOfWeeks: [
+          Recurrence.MONDAY,
+          Recurrence.WEDNESDAY,
+          Recurrence.FRIDAY,
+        ],
+      }
+      assert(Recurrence.next(options, '2015/12/06', 1) === '2015/12/07')
+      assert(Recurrence.next(options, '2015/12/06', 2) === '2015/12/09')
+      assert(Recurrence.next(options, '2015/12/06', 3) === '2015/12/11')
+      assert(Recurrence.next(options, '2015/12/06', 4) === '2015/12/14')
+      assert(Recurrence.next(options, '2015/12/06', 100) === '')
+
+      assert(Recurrence.next(options, '2015/12/19', -1) === '2015/12/18')
+      assert(Recurrence.next(options, '2015/12/19', -2) === '2015/12/16')
+      assert(Recurrence.next(options, '2015/12/19', -3) === '2015/12/14')
+      assert(Recurrence.next(options, '2015/12/19', -4) === '2015/12/11')
+      assert(Recurrence.next(options, '2015/12/19', -100) === '')
+    })
+
+    it('monday, wednesday and friday every two weeks', () => {
+      const options = {
+        startDate: '2015/11/01',
+        endDate: '2015/11/30',
+        every: 'week',
+        interval: 2,
+        dayOfWeeks: [
+          Recurrence.MONDAY,
+          Recurrence.WEDNESDAY,
+          Recurrence.FRIDAY,
+        ],
+      }
+      assert(Recurrence.next(options, '2015/11/15', 1) === '2015/11/16')
+      assert(Recurrence.next(options, '2015/11/15', 2) === '2015/11/18')
+      assert(Recurrence.next(options, '2015/11/15', 3) === '2015/11/20')
+      assert(Recurrence.next(options, '2015/11/15', 4) === '2015/11/30')
+      assert(Recurrence.next(options, '2015/11/15', 100) === '')
+
+      assert(Recurrence.next(options, '2015/11/22', -1) === '2015/11/20')
+      assert(Recurrence.next(options, '2015/11/22', -2) === '2015/11/18')
+      assert(Recurrence.next(options, '2015/11/22', -3) === '2015/11/16')
+      assert(Recurrence.next(options, '2015/11/22', -4) === '2015/11/06')
+      assert(Recurrence.next(options, '2015/11/22', -100) === '')
+    })
+
+    it('10th day of every months', () => {
+      const options = {
+        startDate: '2000/01/10',
+        every: 'month',
+      }
+      assert(Recurrence.next(options, '2015/12/01', 1) === '2015/12/10')
+      assert(Recurrence.next(options, '2015/12/01', 2) === '2016/01/10')
+      assert(Recurrence.next(options, '2015/12/01', 3) === '2016/02/10')
+      assert(Recurrence.next(options, '2015/12/01', -1) === '2015/11/10')
+      assert(Recurrence.next(options, '2015/12/01', -2) === '2015/10/10')
+      assert(Recurrence.next(options, '2015/12/01', -3) === '2015/09/10')
+    })
+
+    it('15th day of every two months', () => {
+      const options = {
+        startDate: '2015/01/15',
+        every: 'month',
+        interval: 2,
+      }
+      assert(Recurrence.next(options, '2015/12/01', 1) === '2016/01/15')
+      assert(Recurrence.next(options, '2015/12/01', 2) === '2016/03/15')
+      assert(Recurrence.next(options, '2015/12/01', 3) === '2016/05/15')
+      assert(Recurrence.next(options, '2015/12/01', -1) === '2015/11/15')
+      assert(Recurrence.next(options, '2015/12/01', -2) === '2015/09/15')
+      assert(Recurrence.next(options, '2015/12/01', -3) === '2015/07/15')
+    })
+
+    it('1/10 of every years', () => {
+      const options = {
+        startDate: '2000/01/10',
+        every: 'year',
+      }
+      assert(Recurrence.next(options, '2015/01/01', 1) === '2015/01/10')
+      assert(Recurrence.next(options, '2015/01/01', 2) === '2016/01/10')
+      assert(Recurrence.next(options, '2015/01/01', 3) === '2017/01/10')
+      assert(Recurrence.next(options, '2015/01/01', -1) === '2014/01/10')
+      assert(Recurrence.next(options, '2015/01/01', -2) === '2013/01/10')
+      assert(Recurrence.next(options, '2015/01/01', -3) === '2012/01/10')
+    })
+
+    it('5/25 of every two years', () => {
+      const options = {
+        startDate: '2001/05/25',
+        every: 'year',
+        interval: 2,
+      }
+      assert(Recurrence.next(options, '2015/01/01', 1) === '2015/05/25')
+      assert(Recurrence.next(options, '2015/01/01', 2) === '2017/05/25')
+      assert(Recurrence.next(options, '2015/01/01', 3) === '2019/05/25')
+      assert(Recurrence.next(options, '2015/01/01', -1) === '2013/05/25')
+      assert(Recurrence.next(options, '2015/01/01', -2) === '2011/05/25')
+      assert(Recurrence.next(options, '2015/01/01', -3) === '2009/05/25')
+    })
+
     it('invalid argument', () => {
       assert(Recurrence.next() === '')
       assert(Recurrence.next({startDate: 'invalid'}, '2015/06/01', 1) === '')

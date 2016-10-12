@@ -76,25 +76,40 @@ export default class extends DayOfWeek {
   }
 
   static next(options = {}, date, times){
-    const { startDate, endDate } = options
+    options = {...defaultOptions, ...options}
+    const { startDate, endDate, interval, every } = options
     if(this.__isValidOptions(options) === false || Sdate.isValid(date) === false || !times){
       return ''
     }
 
     let i = 0
     let matchTimes = 0
-    const limit = 100
+    const limit = 10000
+    const estimateStartDate =
+      0 < times ?
+      Sdate.max(date, Sdate.addDay(startDate, -1)) :
+      Sdate.min(date, Sdate.addDay(endDate, 1))
+    const estimateEndDate =
+      every === 'week' ? Sdate.addDay(estimateStartDate, times * interval * 7) :
+      every === 'month' ? Sdate.addMonth(estimateStartDate, times * interval * 4) :
+      every === 'year' ? Sdate.addYear(estimateStartDate, times * interval * 4) :
+      Sdate.addDay(estimateStartDate, times * interval)
+    let estimateDate
+
     do{
       i++
-      let estimateDate = Sdate.addDay(date, times > 0 ? i : -i)
-
+      estimateDate = Sdate.addDay(estimateStartDate, times > 0 ? i : -i)
       if(this.includes(options, estimateDate)){
         matchTimes++
       }
       if(matchTimes === Math.abs(times)){
         return estimateDate
       }
-    }while(i < limit)
+      var c = (0 < times ?
+        Sdate.lessThanOrEqual(estimateDate, estimateEndDate) :
+        Sdate.lessThanOrEqual(estimateEndDate, estimateDate)
+      ) && i < limit
+    }while(c)
 
     return ''
   }
