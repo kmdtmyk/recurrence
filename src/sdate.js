@@ -136,7 +136,7 @@ export default class {
     return this.create(o.year, o.month, 1)
   }
 
-  static stringToDate(str){
+  static stringToDate(str = ''){
     return new Date(str.replace(/[-.]/g, '/'))
   }
 

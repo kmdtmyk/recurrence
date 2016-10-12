@@ -387,28 +387,52 @@ describe('Recurrence', () => {
 
   })
 
-  xdescribe('next', () => {
+  describe('next', () => {
 
-    it('daily', () => {
-      let r = new Recurrence({
-        startDate: '2016/07/13',
-      })
-      assert(r.next('2016/07/11') === '2016/07/13')
-      assert(r.next('2016/07/12') === '2016/07/13')
-      assert(r.next('2016/07/13') === '2016/07/14')
-      assert(r.next('2016/07/14') === '2016/07/15')
+    it('a day', () => {
+      const options = {
+        startDate: '2015/06/10',
+        endDate: '2015/06/10',
+      }
+      assert(Recurrence.next(options, '2015/06/01', 1) === '2015/06/10')
+      assert(Recurrence.next(options, '2015/06/01', 2) === '')
+      assert(Recurrence.next(options, '2015/06/01', -1) === '')
+      assert(Recurrence.next(options, '2015/07/01', 1) === '')
+      assert(Recurrence.next(options, '2015/07/01', -1) === '2015/06/10')
     })
 
-    it('daily interval', () => {
-      let r = new Recurrence({
-        startDate: '2016/07/13',
-        interval: 2,
-      })
-      assert(r.next('2016/07/11') === '2016/07/13')
-      assert(r.next('2016/07/12') === '2016/07/13')
-      assert(r.next('2016/07/13') === '2016/07/15')
-      assert(r.next('2016/07/14') === '2016/07/15')
-      assert(r.next('2016/07/15') === '2016/07/17')
+    it('daily', () => {
+      const options = {
+        startDate: '2015/06/11',
+        endDate: '2015/06/15',
+      }
+      assert(Recurrence.next(options, '2015/06/01', 1) === '2015/06/11')
+      assert(Recurrence.next(options, '2015/06/01', 3) === '2015/06/13')
+      assert(Recurrence.next(options, '2015/06/01', 5) === '2015/06/15')
+      assert(Recurrence.next(options, '2015/06/01', 6) === '')
+
+      assert(Recurrence.next(options, '2015/06/30', -1) === '2015/06/15')
+      assert(Recurrence.next(options, '2015/06/30', -3) === '2015/06/13')
+      assert(Recurrence.next(options, '2015/06/30', -5) === '2015/06/11')
+      assert(Recurrence.next(options, '2015/06/30', -6) === '')
+
+      assert(Recurrence.next(options, '2015/06/13', 1) === '2015/06/14')
+      assert(Recurrence.next(options, '2015/06/13', 2) === '2015/06/15')
+      assert(Recurrence.next(options, '2015/06/13', 3) === '')
+
+      assert(Recurrence.next(options, '2015/06/13', -1) === '2015/06/12')
+      assert(Recurrence.next(options, '2015/06/13', -2) === '2015/06/11')
+      assert(Recurrence.next(options, '2015/06/13', -3) === '')
+    })
+
+    it('invalid argument', () => {
+      assert(Recurrence.next() === '')
+      assert(Recurrence.next({startDate: 'invalid'}, '2015/06/01', 1) === '')
+      assert(Recurrence.next({startDate: '2015/06/01', endDate: 'invalid'}, '2015/06/01', 1) === '')
+      assert(Recurrence.next({startDate: '2015/06/01', endDate: '2015/06/10'}, 'invalid', 1) === '')
+      assert(Recurrence.next({startDate: '2015/06/01', endDate: '2015/06/10'}) === '')
+      assert(Recurrence.next({startDate: '2015/06/01', endDate: '2015/06/10'}, '2015/06/01') === '')
+      assert(Recurrence.next({startDate: '2015/06/01', endDate: '2015/06/10'}, '2015/06/01', null) === '')
     })
 
   })

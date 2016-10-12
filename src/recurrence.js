@@ -75,4 +75,39 @@ export default class extends DayOfWeek {
     return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date)
   }
 
+  static next(options = {}, date, times){
+    const { startDate, endDate } = options
+    if(this.__isValidOptions(options) === false || Sdate.isValid(date) === false || !times){
+      return ''
+    }
+
+    let i = 0
+    let matchTimes = 0
+    const limit = 100
+    do{
+      i++
+      let estimateDate = Sdate.addDay(date, times > 0 ? i : -i)
+
+      if(this.includes(options, estimateDate)){
+        matchTimes++
+      }
+      if(matchTimes === Math.abs(times)){
+        return estimateDate
+      }
+    }while(i < limit)
+
+    return ''
+  }
+
+  static __isValidOptions(options){
+    const { startDate, endDate } = options
+    if(Sdate.isValid(startDate) === false){
+      return false
+    }
+    if(endDate && Sdate.isValid(endDate) === false){
+      return false
+    }
+    return true
+  }
+
 }
