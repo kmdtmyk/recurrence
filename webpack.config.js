@@ -4,12 +4,12 @@ var webpack = require('webpack');
 module.exports = {
   context: __dirname,
   entry: {
-    recurrence: './src/recurrence',
+    recurrence: './src/recurrence-date',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].min.js',
-    library: 'Recurrence',
+    library: 'RecurrenceDate',
     libraryTarget: 'umd',
   },
   module: {

@@ -1,8 +1,8 @@
 {
-  "name": "recurrence",
+  "name": "recurrence-date",
   "version": "0.1.0",
   "description": "",
-  "main": "recurrence.js",
+  "main": "recurrence-date.js",
   "scripts": {
     "mocha": "NODE_ENV=test mocha -w --compilers js:babel-register --recursive $(find test -name '*.test.js')",
     "karma": "NODE_ENV=test karma start",

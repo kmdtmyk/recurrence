@@ -1,5 +1,5 @@
-import Sdate from './sdate'
-import Calendar from './calendar'
+import StringDate from './string-date'
+import CalendarDate from './calendar-date'
 import DayOfWeek from './day-of-week'
 
 
@@ -28,16 +28,16 @@ export default class extends DayOfWeek {
 
   static __between(options, date){
     const { startDate, endDate } = options
-    if(endDate && Sdate.lessThan(endDate, date) ){
+    if(endDate && StringDate.lessThan(endDate, date) ){
       return false
     }
-    return Sdate.lessThanOrEqual(startDate, date)
+    return StringDate.lessThanOrEqual(startDate, date)
   }
 
   static __daily(options, date){
     options = {...defaultOptions, ...options}
     const { startDate, interval } = options
-    const diffInDay = Sdate.diffInDay(startDate, date)
+    const diffInDay = StringDate.diffInDay(startDate, date)
     return ( diffInDay % interval ) === 0
   }
 
@@ -46,39 +46,39 @@ export default class extends DayOfWeek {
     if(!dayOfWeeks){
       return false
     }
-    const diffInWeek = Calendar.diffInWeek(startDate, date, basisDayOfWeek)
+    const diffInWeek = CalendarDate.diffInWeek(startDate, date, basisDayOfWeek)
     if(diffInWeek % interval !== 0){
       return false
     }
-    return dayOfWeeks.includes(Sdate.dayOfWeek(date))
+    return dayOfWeeks.includes(StringDate.dayOfWeek(date))
   }
 
   static __monthly(options, date){
     const { startDate, interval, dayOfWeeks, basisDayOfWeek } = options
-    if(Sdate.diffInMonth(startDate, date) % interval !== 0){
+    if(StringDate.diffInMonth(startDate, date) % interval !== 0){
       return false
     }
     if(dayOfWeeks){
-      return dayOfWeeks.includes(Sdate.dayOfWeek(date)) && Calendar.weekOfMonth(startDate, basisDayOfWeek) === Calendar.weekOfMonth(date, basisDayOfWeek)
+      return dayOfWeeks.includes(StringDate.dayOfWeek(date)) && CalendarDate.weekOfMonth(startDate, basisDayOfWeek) === CalendarDate.weekOfMonth(date, basisDayOfWeek)
     }
-    return Sdate.day(startDate) === Sdate.day(date)
+    return StringDate.day(startDate) === StringDate.day(date)
   }
 
   static __yearly(options, date){
     const { startDate, interval, dayOfWeeks, basisDayOfWeek } = options
-    if(Sdate.diffInYear(startDate, date) % interval !== 0){
+    if(StringDate.diffInYear(startDate, date) % interval !== 0){
       return false
     }
     if(dayOfWeeks){
-      return dayOfWeeks.includes(Sdate.dayOfWeek(date)) && Calendar.weekOfMonth(startDate, basisDayOfWeek) === Calendar.weekOfMonth(date, basisDayOfWeek)
+      return dayOfWeeks.includes(StringDate.dayOfWeek(date)) && CalendarDate.weekOfMonth(startDate, basisDayOfWeek) === CalendarDate.weekOfMonth(date, basisDayOfWeek)
     }
-    return Sdate.month(startDate) === Sdate.month(date) && Sdate.day(startDate) === Sdate.day(date)
+    return StringDate.month(startDate) === StringDate.month(date) && StringDate.day(startDate) === StringDate.day(date)
   }
 
   static next(options = {}, date, times){
     options = {...defaultOptions, ...options}
     const { startDate, endDate, interval, every } = options
-    if(this.__isValidOptions(options) === false || Sdate.isValid(date) === false || !times){
+    if(this.__isValidOptions(options) === false || StringDate.isValid(date) === false || !times){
       return ''
     }
 
@@ -87,18 +87,18 @@ export default class extends DayOfWeek {
     const limit = 10000
     const estimateStartDate =
       0 < times ?
-      Sdate.max(date, Sdate.addDay(startDate, -1)) :
-      Sdate.min(date, Sdate.addDay(endDate, 1))
+      StringDate.max(date, StringDate.addDay(startDate, -1)) :
+      StringDate.min(date, StringDate.addDay(endDate, 1))
     const estimateEndDate =
-      every === 'week' ? Sdate.addDay(estimateStartDate, times * interval * 7) :
-      every === 'month' ? Sdate.addMonth(estimateStartDate, times * interval * 4) :
-      every === 'year' ? Sdate.addYear(estimateStartDate, times * interval * 4) :
-      Sdate.addDay(estimateStartDate, times * interval)
+      every === 'week' ? StringDate.addDay(estimateStartDate, times * interval * 7) :
+      every === 'month' ? StringDate.addMonth(estimateStartDate, times * interval * 4) :
+      every === 'year' ? StringDate.addYear(estimateStartDate, times * interval * 4) :
+      StringDate.addDay(estimateStartDate, times * interval)
     let estimateDate
 
     do{
       i++
-      estimateDate = Sdate.addDay(estimateStartDate, times > 0 ? i : -i)
+      estimateDate = StringDate.addDay(estimateStartDate, times > 0 ? i : -i)
       if(this.includes(options, estimateDate)){
         matchTimes++
       }
@@ -106,8 +106,8 @@ export default class extends DayOfWeek {
         return estimateDate
       }
       var c = (0 < times ?
-        Sdate.lessThanOrEqual(estimateDate, estimateEndDate) :
-        Sdate.lessThanOrEqual(estimateEndDate, estimateDate)
+        StringDate.lessThanOrEqual(estimateDate, estimateEndDate) :
+        StringDate.lessThanOrEqual(estimateEndDate, estimateDate)
       ) && i < limit
     }while(c)
 
@@ -116,10 +116,10 @@ export default class extends DayOfWeek {
 
   static __isValidOptions(options){
     const { startDate, endDate } = options
-    if(Sdate.isValid(startDate) === false){
+    if(StringDate.isValid(startDate) === false){
       return false
     }
-    if(endDate && Sdate.isValid(endDate) === false){
+    if(endDate && StringDate.isValid(endDate) === false){
       return false
     }
     return true
@@ -127,13 +127,13 @@ export default class extends DayOfWeek {
 
   static extract(options, start, end){
     let result = []
-    let date = Sdate.addDay(start, -1)
+    let date = StringDate.addDay(start, -1)
     let i = 0
     const limit = 10000
     while(i < limit){
       i++
       date = this.next(options, date, 1)
-      if(!date || Sdate.lessThan(end, date)){
+      if(!date || StringDate.lessThan(end, date)){
         break
       }
       result.push(date)
