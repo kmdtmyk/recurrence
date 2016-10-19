@@ -142,3 +142,5 @@ export default class extends DayOfWeek {
   }
 
 }
+
+export {StringDate, CalendarDate}
