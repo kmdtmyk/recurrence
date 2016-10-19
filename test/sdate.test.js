@@ -6,6 +6,7 @@ describe('Sdate', () => {
 
   it('addDay', () => {
     assert(Sdate.addDay('2016/06/15', -1) === '2016/06/14')
+    assert(Sdate.addDay('2016/06/15', -1) === '2016/06/14')
     assert(Sdate.addDay('2016/06/15', 0) === '2016/06/15')
     assert(Sdate.addDay('2016/06/15', 1) === '2016/06/16')
 
@@ -200,6 +201,10 @@ describe('Sdate', () => {
     assert(Sdate.month('2016/4/4') === 4)
     assert(Sdate.month('2016-5-5') === 5)
     assert(Sdate.month('2016.6.6') === 6)
+  })
+
+  it('now', () => {
+    assert(Sdate.now() === Sdate.dateToString(new Date()))
   })
 
   it('startOfMonth', () => {

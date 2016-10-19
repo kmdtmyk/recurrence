@@ -111,6 +111,10 @@ export default class {
     return this.toObject(str).month
   }
 
+  static now(){
+    return this.dateToString(new Date())
+  }
+
   static greaterThan(str1, str2){
     const date1 = this.stringToDate(str1)
     const date2 = this.stringToDate(str2)
